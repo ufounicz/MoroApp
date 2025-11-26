@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004
+      author: jurcik
+      changes:
+        - dropDefaultValue:
+            tableName: users
+            columnName: username
+        - dropDefaultValue:
+            tableName: users
+            columnName: password

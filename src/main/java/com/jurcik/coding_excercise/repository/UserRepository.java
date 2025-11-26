@@ -22,7 +22,7 @@ public class UserRepository {
     }
 
     public UsersRecord createUser(String name) {
-        return dslContext.insertInto(Users.USERS).columns(Users.USERS.ID, Users.USERS.NAME).values(UUID.randomUUID(), name).returning().fetchOne();
+        return dslContext.insertInto(Users.USERS).columns(Users.USERS.NAME).values(name).returning().fetchOne();
     }
 
     public void modifyName(UUID userId, String newName) {
