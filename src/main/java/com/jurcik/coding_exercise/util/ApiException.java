@@ -1,4 +1,4 @@
-package com.jurcik.coding_excercise.util;
+package com.jurcik.coding_exercise.util;
 
 import org.springframework.http.HttpStatus;
 

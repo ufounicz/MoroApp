@@ -8,7 +8,7 @@
         <version>4.0.0</version>
     </parent>
     <groupId>com.jurcik</groupId>
-    <artifactId>coding-excercise</artifactId>
+    <artifactId>coding-exercise</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>coding-exercise</name>
     <description>Coding exercise solution for a job interview</description>
@@ -24,6 +24,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -48,6 +52,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -123,7 +132,7 @@
                             <inputSchema>public</inputSchema>
                         </database>
                         <target>
-                            <packageName>com.jurcik.coding_excercise.jooq</packageName>
+                            <packageName>com.jurcik.coding_exercise.jooq</packageName>
                             <directory>src/main/java</directory>
                         </target>
                     </generator>

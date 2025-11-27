@@ -1,13 +1,13 @@
-package com.jurcik.coding_excercise;
+package com.jurcik.coding_exercise;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CodingExcerciseApplication {
+public class CodingExerciseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CodingExcerciseApplication.class, args);
+		SpringApplication.run(CodingExerciseApplication.class, args);
 	}
 
 }

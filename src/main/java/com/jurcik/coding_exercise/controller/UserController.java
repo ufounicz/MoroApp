@@ -1,7 +1,7 @@
-package com.jurcik.coding_excercise.controller;
+package com.jurcik.coding_exercise.controller;
 
-import com.jurcik.coding_excercise.dto.*;
-import com.jurcik.coding_excercise.service.UserService;
+import com.jurcik.coding_exercise.dto.*;
+import com.jurcik.coding_exercise.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;

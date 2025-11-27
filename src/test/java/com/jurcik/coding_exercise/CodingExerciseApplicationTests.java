@@ -1,10 +1,10 @@
-package com.jurcik.coding_excercise;
+package com.jurcik.coding_exercise;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CodingExcerciseApplicationTests {
+class CodingExerciseApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,6 +1,6 @@
-package com.jurcik.coding_excercise;
+package com.jurcik.coding_exercise;
 
-import com.jurcik.coding_excercise.util.ApiException;
+import com.jurcik.coding_exercise.util.ApiException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
