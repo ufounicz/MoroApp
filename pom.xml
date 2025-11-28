@@ -130,6 +130,14 @@
                         <database>
                             <name>org.jooq.meta.postgres.PostgresDatabase</name>
                             <inputSchema>public</inputSchema>
+                            <forcedTypes>
+                                <forcedType>
+                                    <name>VARCHAR</name>
+                                    <userType>com.jurcik.coding_exercise.util.UserRole</userType>
+                                    <enumConverter>true</enumConverter>
+                                    <includeExpression>public\.users\.role</includeExpression>
+                                </forcedType>
+                            </forcedTypes>
                         </database>
                         <target>
                             <packageName>com.jurcik.coding_exercise.jooq</packageName>

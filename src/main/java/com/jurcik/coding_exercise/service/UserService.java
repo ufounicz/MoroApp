@@ -4,10 +4,7 @@ import com.jurcik.coding_exercise.PermissionValidator;
 import com.jurcik.coding_exercise.dto.*;
 import com.jurcik.coding_exercise.jooq.tables.records.UsersRecord;
 import com.jurcik.coding_exercise.repository.UserRepository;
-import com.jurcik.coding_exercise.util.ApiException;
-import com.jurcik.coding_exercise.util.PermissionDeniedException;
-import com.jurcik.coding_exercise.util.PermissionLevel;
-import com.jurcik.coding_exercise.util.UserNotFoundException;
+import com.jurcik.coding_exercise.util.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,8 +29,8 @@ public class UserService {
             throw new ApiException("User already exists!", HttpStatus.CONFLICT);
         }
 
-        UsersRecord createdUser = userRepository.createUser(createUserRequest.name(), createUserRequest.username(), encodedPassword);
-        return new CreateUserResponse(createdUser.getId(), createdUser.getName(), createdUser.getUsername());
+        UsersRecord createdUser = userRepository.createUser(createUserRequest.name(), createUserRequest.username(), encodedPassword, createUserRequest.role());
+        return new CreateUserResponse(createdUser.getId(), createdUser.getName(), createdUser.getUsername(), createdUser.getRole());
     }
 
     public GetUserResponse getUser(UUID userId) {
@@ -50,7 +47,7 @@ public class UserService {
         }
 
         UsersRecord record = optionalUsersRecord.get();
-        return new GetUserResponse(new User(record.getId(), record.getName(), record.getUsername()));
+        return new GetUserResponse(new User(record.getId(), record.getName(), record.getUsername(), record.getRole()));
     }
 
     public void modifyUser(UUID userId, ModifyUserRequest modifyUserRequest) {
@@ -78,6 +75,9 @@ public class UserService {
         if (modifyUserRequest.password() != null) {
             userRepository.modifyPassword(userId, passwordEncoder.encode(modifyUserRequest.password()));
         }
+        if (modifyUserRequest.role() != null) {
+            userRepository.modifyRole(userId, modifyUserRequest.role());
+        }
     }
 
     public void deleteUser(UUID userId) {
@@ -99,7 +99,7 @@ public class UserService {
     public ListUsersResponse listUsers() {
         UsersRecord[] users = userRepository.listUsers();
 
-        List<User> userList = Arrays.stream(users).map(e -> new User(e.getId(), e.getName(), e.getUsername())).toList();
+        List<User> userList = Arrays.stream(users).map(e -> new User(e.getId(), e.getName(), e.getUsername(), e.getRole())).toList();
         return new ListUsersResponse(userList);
     }
 }

@@ -2,6 +2,7 @@ package com.jurcik.coding_exercise.repository;
 
 import com.jurcik.coding_exercise.jooq.tables.Users;
 import com.jurcik.coding_exercise.jooq.tables.records.UsersRecord;
+import com.jurcik.coding_exercise.util.UserRole;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
@@ -25,8 +26,8 @@ public class UserRepository {
         return dslContext.selectFrom(Users.USERS).where(Users.USERS.USERNAME.equalIgnoreCase(username)).fetchOptional();
     }
 
-    public UsersRecord createUser(String name, String username, String encodedPassword) {
-        return dslContext.insertInto(Users.USERS).columns(Users.USERS.NAME, Users.USERS.USERNAME, Users.USERS.PASSWORD).values(name, username, encodedPassword).returning().fetchOne();
+    public UsersRecord createUser(String name, String username, String encodedPassword, UserRole role) {
+        return dslContext.insertInto(Users.USERS).columns(Users.USERS.NAME, Users.USERS.USERNAME, Users.USERS.PASSWORD, Users.USERS.ROLE).values(name, username, encodedPassword, role).returning().fetchOne();
     }
 
     public void modifyName(UUID userId, String newName) {
@@ -39,6 +40,10 @@ public class UserRepository {
 
     public void modifyPassword(UUID userId, String newEncryptedPassword) {
         dslContext.update(Users.USERS).set(Users.USERS.PASSWORD, newEncryptedPassword).where(Users.USERS.ID.eq(userId)).execute();
+    }
+
+    public void modifyRole(UUID userId, UserRole role) {
+        dslContext.update(Users.USERS).set(Users.USERS.ROLE, role).where(Users.USERS.ID.eq(userId)).execute();
     }
 
     public void deleteUser(UUID userId) {
