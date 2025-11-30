@@ -30,34 +30,41 @@ Running this application is fairly easy. There are two ways we can run this app,
 1. Running PostgreSQL database.
 2. Java 21
 3. Docker (if we want the containerized version)
+4. Maven
 
 ### Development install
 
-1. Set up PostgreSQL database and provide the app with connection information in form of these environmant variables:
-   1. DB_HOST
-   2. DB_PORT
-   3. DB_NAME
-   4. DB_USERNAME
-   5. DB_PASSWORD
-2. Apply liquibase scripts to patch the DB
-   - Run `mvn liquibase:update`
+1. Set up PostgreSQL database
+2. Apply Liquibase scripts to patch the DB
+      - Run `mvn liquibase:update`
+        - Provide DB connection details with following environment variables:
+          - DB_HOST
+          - DB_PORT
+          - DB_NAME
+          - DB_PASSWORD
+          - DB_USERNAME
 3. Run the app with development profile
-   - Add SPRING_PROFILES_ACTIVE env var with value 'dev'
+   - Add SPRING_PROFILES_ACTIVE env var with value 'dev' to the privously used env vars
    - Run `mvn spring-boot:run`
 
 ### Containerized install
 
-1. Set up PostgreSQL database and provide the app with connection information in form of these environmant variables:
-   1. DB_HOST
-   2. DB_PORT
-   3. DB_NAME
-   4. DB_USERNAME
-   5. DB_PASSWORD
-2. Apply liquibase scripts to patch the DB
-   - Run `mvn liquibase:update`
-3. Modify docker-compose.yml so that the env vars supplied match your setup.
-4. Containerized version needs `prod` spring profile! It affects how liquibase works.
-5. Run `docker compose up -d`
+1. Set up PostgreSQL database.
+2. Apply Liquibase scripts to patch the DB
+      - Run `mvn liquibase:update`
+        - Provide DB connection details with following environment variables:
+          - DB_HOST
+          - DB_PORT
+          - DB_NAME
+          - DB_PASSWORD
+          - DB_USERNAME
+3. Build the app
+   - Run `mvn clean package`
+     - Provide the same env vars as for the liquibase update
+4. (Optional) Modify the docker-compose.yaml file to better suite your needs
+   - specifying the DB volume path etc.
+5. Run the app and its DB
+   - Run `docker compose up -d`
 
 ## TODOs
 
@@ -66,10 +73,6 @@ This project has some areas where it could (and should) be improved, but those w
 ### Testing
 
 There are no tests implemented currently. Using some framework to add unit and/or integration tests like JUnit or TestNG in combination with Testcontainers is strongly advised.
-
-### Sensitive data
-
-Credentials and other sensitive data should be taken out of the property files and pom and rather passed as an environment variables, which then can be read by Spring. This will also be handy when deploying the app in different environments.
 
 ### Deployment
 
@@ -82,7 +85,7 @@ As required in the assignment, this application uses Basic Auth, which is unsafe
 
 ### CI/CD
 
-CI/CD pipelines for testing/deployment should be created for faster and easier development and deployment.
+Pipelines should be created to automate the build and deployment process as well as automated testing before merges or after push to designated branches.
 
 ### Encryption
 
